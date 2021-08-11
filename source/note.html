@@ -1,0 +1,51 @@
+<div class="card text-dark bg-light border-primary mb-3" style="width: 50%; position: inherit">
+    <div class="card-body">
+        <h2 class="card-title" style="color: #ff8dac">{{note.title}}</h2>
+
+        <p>{{note.text}}</p>
+
+        <p>public</p>
+
+        <p>private</p>
+        <div ng-repeat='attachment in note.attachments'>
+            <div style="display: flex; flex-direction: row">
+                <p>{{attachment.file_original_name}}</p>
+
+                <form action="/notes/{{note.uuid}}/detach" method="post">
+
+                    <p>
+                        <button class="btn btn-info" type="submit" value="{{attachment.id}}"
+                                name="id" style="margin-left: 10px">Detach
+                        </button>
+                    </p>
+                </form>
+
+                <form action="/notes/{{note.uuid}}/download" method="get">
+
+                    <p>
+                        <button class="btn btn-info" type="submit" value="{{attachment.id}}"
+                                name="id" style="margin-left: 10px">Download
+                        </button>
+                    </p>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="card-footer">{{note.user.name}}</div>
+</div>
+
+<form action="/notes/{{note.uuid}}/edit" method="get">
+    <button type="submit" class="btn btn-warning" style="margin-bottom: 10px">EDIT</button>
+</form>
+<form action="/notes/{{note.uuid}}" method="post">
+
+    <button type="submit" class="btn btn-danger">DELETE</button>
+</form>
+<form action="/notes/{{note.uuid}}/share" method="post">
+
+    <label class="form-label">Введите email</label>
+    <input type="email" name="email">
+    <button type="submit" class="btn btn-success" style="margin-left: 6px">SHARED</button>
+</form>

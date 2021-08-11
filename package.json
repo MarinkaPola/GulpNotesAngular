@@ -1,0 +1,19 @@
+{
+  "name": "gulpnotesangular",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "angular": "^1.8.2",
+    "bootstrap": "^5.1.0",
+    "browser-sync": "^2.27.5",
+    "gulp": "^4.0.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-less": "^5.0.0"
+  },
+  "dependencies": {
+    "rimraf": "^3.0.2"
+  }
+}
