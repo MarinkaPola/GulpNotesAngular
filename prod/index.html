@@ -9,12 +9,14 @@
 
     <link href="styles.css" rel="stylesheet">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.js" ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js" ></script>
+    <script src="//unpkg.com/@uirouter/angularjs/release/angular-ui-router.min.js"></script>
+
     <script type="text/javascript" src="app.js"></script>
 
 </head>
 <body>
-<ng-view></ng-view>
+
 ghhk
 <div ng-controller="appCtrl">
     <div style="display: flex; justify-content: center; margin-top: 100px; ">
@@ -36,7 +38,7 @@ ghhk
                     <p ng-if="note.visibility === 1">public</p>
 
                     <button type="button" class="btn btn-info">
-                        <a href="/notes/{{note.uuid}}">
+                        <a ui-sref="#/notes/{{note.uuid}}" ui-sref-active="active">
                             details
                         </a>
                     </button>
@@ -46,5 +48,10 @@ ghhk
         </div>
     </div>
 </div>
+
+<div  ui-view>
+
+</div>
+
 </body>
 </html>

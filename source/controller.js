@@ -1,8 +1,8 @@
-const app = angular.module('app', []);
+const app = angular.module('app', ['ui.router']);
 
 app.controller('appCtrl', function ($http, $scope) {
 
-        $http.get('http://example-app/public/api')
+        $http.get('http://notesBack/public/api')
             .then(function (result) {
                 console.log('success', result);
                 $scope.notes = result.data.data.collection;
@@ -13,9 +13,9 @@ app.controller('appCtrl', function ($http, $scope) {
     });
 
 
-app.controller('appCtrl', function ($http, $scope) {
+app.controller('noteCtrl', function ($http, $scope) {
 
-    $http.get('http://example-app/public/api/notes/:uuid')
+    $http.get('http://notesBack/public/api/notes/{{note.uuid}}')
         .then(function (result) {
                 console.log('success', result);
                 $scope.note = result.data.data;

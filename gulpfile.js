@@ -30,6 +30,7 @@ gulp.task('less', async function () {
 gulp.task('scripts', async function () {
    gulp.src([
              './node_modules/angular/angular.min.js',
+             './node_modules/@uirouter',
              './source/app.js',
              './source/controller.js',
             ])
