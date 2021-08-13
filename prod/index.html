@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>MyJS</title>
 
@@ -38,7 +39,7 @@ ghhk
                     <p ng-if="note.visibility === 1">public</p>
 
                     <button type="button" class="btn btn-info">
-                        <a ui-sref="#/notes/{{note.uuid}}" ui-sref-active="active">
+                        <a href="/notes/{{note.uuid}}" ui-sref-active="active">
                             details
                         </a>
                     </button>
