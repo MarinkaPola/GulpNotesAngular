@@ -6,11 +6,12 @@ app.controller('appCtrl', function ($http, $scope) {
             .then(function (result) {
                 console.log('success', result);
                 $scope.notes = result.data.data.collection;
-            },
+                },
                 function (result) {
                     console.log('error');
                 })
     });
+
 
 
 app.controller('noteCtrl', function ($http, $scope) {
@@ -24,3 +25,6 @@ app.controller('noteCtrl', function ($http, $scope) {
                 console.log('error');
             })
 });
+
+
+

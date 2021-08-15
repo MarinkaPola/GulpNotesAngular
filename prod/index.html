@@ -39,7 +39,7 @@ ghhk
                     <p ng-if="note.visibility === 1">public</p>
 
                     <button type="button" class="btn btn-info">
-                        <a href="/notes/{{note.uuid}}" ui-sref-active="active">
+                        <a ui-sref="route1" ui-sref-active="active">
                             details
                         </a>
                     </button>
@@ -50,7 +50,7 @@ ghhk
     </div>
 </div>
 
-<div  ui-view>
+<div class="well" ui-view>
 
 </div>
 
