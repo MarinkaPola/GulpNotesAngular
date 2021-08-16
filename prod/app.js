@@ -351,42 +351,45 @@ WEEKENDRANGE:[5,6],fullDate:"EEEE, MMMM d, y",longDate:"MMMM d, y",medium:"MMM d
 c){var e=a|0,f=c;void 0===f&&(f=Math.min(b(a),3));Math.pow(10,f);return 1==e&&0==f?"one":"other"}})}]),x(function(){Ee(z.document,Wc)}))})(window);!window.angular.$$csp().noInlineStyle&&window.angular.element(document.head).prepend(window.angular.element("<style>").text('@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}'));
 //# sourceMappingURL=angular.min.js.map
 
-(function() {
-angular.module('app', ['ui.router'])
 
+const app = angular.module('app', ['ui.router']);
 
-
-.config(['$stateProvider', function ($stateProvider) {
+/*app.config(['$stateProvider', function ($stateProvider) {
     $stateProvider
-        .state('route1', {
-             url: "/route1",
-            templateUrl: "note.html",
+        .state( {
+            url: "",
+            templateUrl: "../home.html",
+            controller: "appCtrl"
+        })
+}]);*/
+
+app.config(['$stateProvider', function ($stateProvider) {
+    $stateProvider
+        .state( {
+            name: "route1",
+            url: "/route1",
+            templateUrl: "../note.html",
             controller: "noteCtrl"
         })
-    }]);
-})();
-
-(function(){
-    
-const app = angular.module('app', ['ui.router']);
+}]);
 
 app.controller('appCtrl', function ($http, $scope) {
 
-        $http.get('http://notesBack/public/api')
-            .then(function (result) {
+    $http.get('http://notesBack/public/api')
+        .then(function (result) {
                 console.log('success', result);
                 $scope.notes = result.data.data.collection;
-                },
-                function (result) {
-                    console.log('error');
-                })
-    });
+            },
+            function (result) {
+                console.log('error');
+            })
+});
 
 
 
 app.controller('noteCtrl', function ($http, $scope) {
 
-    $http.get('http://notesBack/public/api/notes/{{note.uuid}}')
+    $http.get('http://notesBack/public/api/notes/'.notes)
         .then(function (result) {
                 console.log('success', result);
                 $scope.note = result.data.data;
@@ -398,4 +401,4 @@ app.controller('noteCtrl', function ($http, $scope) {
 
 
 
-})();
+

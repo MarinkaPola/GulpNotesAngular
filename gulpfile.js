@@ -13,9 +13,17 @@ gulp.task('browser-sync', function() {
 });
 
 gulp.task('build', function() {
-    return gulp.src('index.html')
+    return [gulp.src('index.html')
         .pipe(gulp.dest('./prod/'))
-        .pipe(browserSync.stream())
+        .pipe(browserSync.stream()),
+
+        gulp.src('home.html')
+            .pipe(gulp.dest('./prod/'))
+            .pipe(browserSync.stream()),
+
+    gulp.src('note.html')
+        .pipe(gulp.dest('./prod/'))
+        .pipe(browserSync.stream()), ]
 });
 
 
@@ -42,7 +50,6 @@ gulp.task('watch', async function () {
     gulp.watch('./source/**/*.less', gulp.series('less'));
     gulp.watch('./source/**/*.js', gulp.series('scripts'));
 });
-
 
 
 

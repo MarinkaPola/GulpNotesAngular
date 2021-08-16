@@ -1,24 +1,5 @@
-<!DOCTYPE html>
-<html lang="en" ng-app="app">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>MyJS</title>
-
-    <link href="styles.css" rel="stylesheet">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js" ></script>
-    <script src="//unpkg.com/@uirouter/angularjs/release/angular-ui-router.min.js"></script>
-
-    <script type="text/javascript" src="app.js"></script>
-
-</head>
-<body>
-
-ghhk
 <div ng-controller="appCtrl">
     <div style="display: flex; justify-content: center; margin-top: 100px; ">
         <!-- Search form -->
@@ -36,7 +17,6 @@ ghhk
                 <article style="margin: 15px">
                     <h2 class="card-title" style="color: #ff8dac">{{note.title}}</h2>
                     <p>{{note.text}}</p>
-                    <p>{{note.uuid}}</p>
                     <p ng-if="note.visibility === 1">public</p>
 
 
@@ -51,9 +31,6 @@ ghhk
     </div>
 </div>
 
-<div class="well" ui-view>
 
-</div>
 
-</body>
-</html>
+
