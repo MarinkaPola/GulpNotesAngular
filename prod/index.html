@@ -19,7 +19,7 @@
 <body>
 
 ghhk
-<div ng-controller="appCtrl">
+<div ng-controller="appCtrl" id="outer">
     <div style="display: flex; justify-content: center; margin-top: 100px; ">
         <!-- Search form -->
         <form id="custom-search-form" class="form-search form-horizontal pull-right" action="http://example-app/public/api" method="get">
@@ -40,7 +40,7 @@ ghhk
                     <p ng-if="note.visibility === 1">public</p>
 
 
-                        <a class="btn btn-info" ui-sref="route1" ui-sref-active="active">
+                        <a class="btn btn-info" ui-sref="note({ noteUuid: note.uuid })" ui-sref-active="active">
                             details
                         </a>
 
