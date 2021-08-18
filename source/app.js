@@ -1,24 +1,30 @@
 
 const app = angular.module('app', ['ui.router']);
 
-/*app.config(['$stateProvider', function ($stateProvider) {
-    $stateProvider
-        .state( {
-            url: "",
-            templateUrl: "../home.html",
-            controller: "appCtrl"
-        })
-}]);*/
+app.component('noteShow', {
+    //selector: "noteShow", // <note-show></note-show>
+    templateUrl: "../note.html",
+    controller: "noteCtrl",
+});
+
+app.component('notesShow', {
+    selector: "notesShow", // <notes-show></notes-show>
+    templateUrl: "../home.html",
+    controller: "appCtrl",
+});
 
 app.config(['$stateProvider', function ($stateProvider) {
+
     $stateProvider
         .state( {
-          //  name: "route1",
-          //  url: "/route1",
             name: 'note',
             url: '/notes/{noteUuid}',
-            templateUrl: "../note.html",
-            controller: "noteCtrl"
+            component: 'noteShow',
+        })
+        .state( {
+            name: "#",
+            url: "/",
+            component: "notesShow"
         })
 }]);
 
@@ -41,10 +47,9 @@ app.controller('appCtrl', function ($http, $scope) {
 });
 
 
-
 app.controller('noteCtrl', function ($http, $scope, $stateParams) {
     console.log(app.myGlobalObject);
-   $scope.noteUuid = $stateParams.noteUuid;
+    $scope.noteUuid = $stateParams.noteUuid;
     console.log($scope.noteUuid);
     $http.get('http://notesBack/public/api/notes/'+$scope.noteUuid)
         .then(function (result) {
@@ -55,6 +60,7 @@ app.controller('noteCtrl', function ($http, $scope, $stateParams) {
                 console.log('error');
             })
 });
+
 
 
 
