@@ -13,7 +13,8 @@ app.component('notesShow', {
     controller: "appCtrl",
 });
 
-app.config(['$stateProvider', function ($stateProvider) {
+app.config(['$stateProvider', function ($stateProvider,  $urlRouterProvider) {
+
 
     $stateProvider
         .state( {
@@ -21,9 +22,9 @@ app.config(['$stateProvider', function ($stateProvider) {
             url: '/notes/{noteUuid}',
             component: 'noteShow',
         })
-        .state( {
-            name: "#",
-            url: "/",
+        .state('default',{
+          //  name: "#",
+            url: "",
             component: "notesShow"
         })
 }]);

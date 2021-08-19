@@ -12,7 +12,7 @@ gulp.task('browser-sync', function() {
     });
 });
 
-gulp.task('build', function() {
+gulp.task('build', async function() {
     return [gulp.src('index.html')
         .pipe(gulp.dest('./prod/'))
         .pipe(browserSync.stream()),
