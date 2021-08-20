@@ -1,0 +1,26 @@
+
+<div ng-controller="createCtrl">
+    <form enctype="multipart/form-data" class="row g-3 needs-validation" >
+    <div >
+        <div class="col-md-16" style="padding-left: 0">
+            <label for="validationDefault01" class="form-label">Название</label>
+            <input id="validationDefault01" type="text" class="form-control" ng-required="true"  ng-model="note.title">
+        </div>
+        <div class="col-md-16">
+            <label for="exampleFormControlTextarea1" class="form-label">Текст</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1"    ng-model="note.text" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">Видимость записки</label>
+            <select class="form-control" id="exampleFormControlSelect1" ng-required="true" ng-model="note.visibility">
+                <option value="0">private</option>
+                <option value="1">public</option>
+            </select>
+        </div>
+        <input type="file" name="file" id="file" >
+        <div style="margin-top: 10px; padding-left: 0" class="col-md-10">
+            <button class="btn btn-primary" type="submit" ng-click="create(note)">Отправить заметку</button>
+        </div>
+    </div>
+</form>
+</div>
