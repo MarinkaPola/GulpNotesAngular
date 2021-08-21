@@ -1,8 +1,23 @@
 
 const app = angular.module('app', ['ui.router']);
 
+app.component('register', {
+    templateUrl: "../register.html",
+    controller: "registerCtrl",
+});
+
+app.component('login', {
+    templateUrl: "../login.html",
+    controller: "loginCtrl",
+});
+
+app.component('header', {
+    selector: "header", // <header></header>
+    templateUrl: "../header.html",
+   // controller: "headerCtrl",
+});
+
 app.component('noteShow', {
-    //selector: "noteShow", // <note-show></note-show>
     templateUrl: "../note.html",
     controller: "noteCtrl",
 });
@@ -46,6 +61,17 @@ app.config(['$stateProvider', function ($stateProvider) {
             name: 'noteCreate',
             url: '/notes/create',
             component: 'noteCreate',
+        })
+
+        .state( {
+            name: 'register',
+            url: '/register',
+            component: 'register',
+        })
+        .state( {
+            name: 'login',
+            url: '/login',
+            component: 'login',
         })
 }]);
 
@@ -111,4 +137,30 @@ app.controller('createCtrl', function ($http, $scope, $stateParams) {
                     console.log('error');
                 })
     }
+});
+
+app.controller('registerCtrl', function ($http, $scope) {
+    $scope.registering = function (user) {
+        console.log(user);
+        $http.post('http://notesBack/public/api/register', user)
+            .then(function (result) {
+                    console.log('success', result);
+                },
+                function (result) {
+                    console.log('error');
+                })
+    }
+
+});
+app.controller('loginCtrl', function ($http, $scope) {
+   $scope.logining = function (user) {
+       console.log(user);
+       $http.post('http://notesBack/public/api/login', user)
+           .then(function (result) {
+                   console.log('success', result);
+               },
+               function (result) {
+                   console.log('error');
+               })
+   }
 });

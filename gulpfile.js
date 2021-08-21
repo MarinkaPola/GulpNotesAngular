@@ -34,6 +34,18 @@ gulp.task('build', async function () {
             .pipe(gulp.dest('./prod/'))
             .pipe(browserSync.stream()),
 
+        gulp.src('header.html')
+            .pipe(gulp.dest('./prod/'))
+            .pipe(browserSync.stream()),
+
+        gulp.src('register.html')
+            .pipe(gulp.dest('./prod/'))
+            .pipe(browserSync.stream()),
+
+        gulp.src('login.html')
+            .pipe(gulp.dest('./prod/'))
+            .pipe(browserSync.stream()),
+
     ]
 });
 

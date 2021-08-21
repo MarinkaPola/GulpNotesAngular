@@ -1,0 +1,39 @@
+<div ng-controller="loginCtrl" style="border: solid 1px #73b3ff; width: 30%; margin: 40px; border-radius: 5px; padding-left: 20px; padding-bottom: 10px">
+    <form>
+        <!-- Email Address -->
+        <div class="mt-4">
+            <label for="email" class="form-label">Email
+                <input id="email" class="form-control" type="email" name="email" value="" required ng-model="user.email"
+                       autofocus>
+            </label>
+        </div>
+
+        <!-- Password -->
+        <div class="mt-4">
+            <label for="password" class="form-label">Password
+                <input id="password" class="form-control"
+                       type="password"
+                       name="password"
+                       required autocomplete="current-password" value="" ng-model="user.password">
+            </label>
+        </div>
+        <!-- Remember Me -->
+        <div class="block mt-4">
+            <label for="remember_me" class="inline-flex items-center">
+                <input id="remember_me" type="checkbox"
+                       class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                       name="remember" >
+                <span class="ml-2 text-sm text-gray-600">Remember me</span>
+            </label>
+        </div>
+
+        <div class="flex items-center justify-end mt-4">
+            <a class="underline text-sm text-gray-600 hover:text-gray-900" href="#" style="margin-right: 15px">
+                Forgot your password?
+            </a>
+            <button class="btn btn-danger" ng-click="logining(user)">
+                Login
+            </button>
+        </div>
+    </form>
+</div>

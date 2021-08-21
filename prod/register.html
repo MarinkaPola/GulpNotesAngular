@@ -1,0 +1,47 @@
+<div ng-controller="registerCtrl" style="border: solid 1px #73b3ff; width: 30%; margin: 40px; border-radius: 5px; padding-left: 20px; padding-bottom: 10px">
+    <form>
+        <!-- Name -->
+        <div class="mt-4">
+            <label for="name" class="form-label">Name
+                <input id="name"  type="text" name="name" value="" required class="form-control" ng-model="user.name"
+                       autofocus>
+            </label>
+        </div>
+
+        <!-- Email Address -->
+        <div class="mt-4">
+            <label for="email" class="form-label">Email
+                <input id="email"  type="email" name="email" value="" required class="form-control" ng-model="user.email">
+            </label>
+        </div>
+
+        <!-- Password -->
+        <div class="mt-4">
+            <label for="password" class="form-label">Password
+                <input id="password"  class="form-control"
+                       type="password"
+                       name="password" ng-model="user.password"
+                       required autocomplete="new-password">
+            </label>
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="mt-4">
+            <label for="password_confirmation" class="form-label">Confirm Password
+                <input id="password_confirmation"  class="form-control"
+                       type="password"
+                       name="password_confirmation" required ng-model="user.password">
+            </label>
+        </div>
+
+        <div class="flex items-center justify-end mt-4">
+            <a class="underline text-sm text-gray-600 hover:text-gray-900" href="#" style="margin-right: 15px">
+                Already registered?
+            </a>
+
+            <button class="btn btn-danger" ng-click="registering(user)">
+                Register
+            </button>
+        </div>
+    </form>
+</div>
