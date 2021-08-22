@@ -1,9 +1,10 @@
-<div  style="display: flex; flex-direction: row; justify-content: space-between; background-color: #b7e9ff;"> <!--ng-controller="headerCtrl"-->
+<div ng-controller="headerCtrl" style="display: flex; flex-direction: row; justify-content: space-between; background-color: #b7e9ff;">
     <div style="font-size: 20px; padding-left: 20px; padding-top: 15px; height:80px" >
         MY PROJECT NOTES
     </div>
     <div style="padding-top: 25px">
-        <a ui-sref="login" ui-sref-active="active" class="text-sm text-gray-700 underline" style="margin-right: 15px">Login</a>
-        <a ui-sref="register" ui-sref-active="active" class="ml-4 text-sm text-gray-700 underline" style="margin-right: 15px">Register</a>
+        <a ng-if="!user.id" ui-sref="login" ui-sref-active="active" class="text-sm text-gray-700 underline" style="margin-right: 15px">Login</a>
+        <a ng-if="!user.id" ui-sref="register" ui-sref-active="active" class="ml-4 text-sm text-gray-700 underline" style="margin-right: 15px">Register</a>
+        <a ng-if="user.id" ui-sref="logout" ui-sref-active="active" class="ml-4 text-sm text-gray-700 underline" style="margin-right: 15px">Logout</a>
     </div>
 </div>

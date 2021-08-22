@@ -43,7 +43,7 @@
     </a>
     <form action="/notes/{{note.uuid}}" method="post">
 
-        <button type="submit" class="btn btn-danger">DELETE</button>
+        <button type="submit" class="btn btn-danger" ng-click="delete(note)">DELETE</button>
     </form>
     <form action="/notes/{{note.uuid}}/share" method="post">
 

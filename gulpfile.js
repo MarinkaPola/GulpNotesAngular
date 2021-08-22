@@ -46,6 +46,13 @@ gulp.task('build', async function () {
             .pipe(gulp.dest('./prod/'))
             .pipe(browserSync.stream()),
 
+        gulp.src('dashboard.html')
+            .pipe(gulp.dest('./prod/'))
+            .pipe(browserSync.stream()),
+
+        gulp.src('notesSharedWu.html')
+            .pipe(gulp.dest('./prod/'))
+            .pipe(browserSync.stream()),
     ]
 });
 

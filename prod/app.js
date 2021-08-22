@@ -14,7 +14,7 @@ app.component('login', {
 app.component('header', {
     selector: "header", // <header></header>
     templateUrl: "../header.html",
-   // controller: "headerCtrl",
+   controller: "headerCtrl",
 });
 
 app.component('noteShow', {
@@ -38,6 +38,16 @@ app.component('noteCreate', {
     controller: "createCtrl",
 });
 
+app.component('dashboard', {
+    templateUrl: "../dashboard.html",
+    controller: "dashboardCtrl",
+});
+
+app.component('notesSharedWu', {
+    templateUrl: "../notesSharedWu.html",
+    controller: "notesSharedWuCtrl",
+});
+
 app.config(['$stateProvider', function ($stateProvider) {
 
 
@@ -52,6 +62,13 @@ app.config(['$stateProvider', function ($stateProvider) {
             url: "",
             component: 'notesShow',
         })
+
+        .state( {
+            name: 'notesSharedWu',
+            url: '/notes-shared-you',
+            component: 'notesSharedWu',
+        })
+
         .state( {
             name: 'noteEdit',
             url: '/notes/{noteUuid}/edit',
@@ -73,6 +90,11 @@ app.config(['$stateProvider', function ($stateProvider) {
             url: '/login',
             component: 'login',
         })
+        .state( {
+            name: 'dashboard',
+            url: '/notes',
+            component: 'dashboard',
+        })
 }]);
 
 
@@ -91,7 +113,7 @@ app.controller('appCtrl', function ($http, $scope) {
 });
 
 
-app.controller('noteCtrl', function ($http, $scope, $stateParams) {
+app.controller('noteCtrl', function ($http, $scope, $stateParams, $location) {
 
     $scope.noteUuid = $stateParams.noteUuid;
     console.log($scope.noteUuid);
@@ -103,10 +125,20 @@ app.controller('noteCtrl', function ($http, $scope, $stateParams) {
             },
             function (result) {
                 console.log('error');
-            })
+            });
+    $scope.delete = function (note) {
+        $http.delete('http://notesBack/public/api/notes/'+$scope.noteUuid, note)
+            .then(function (result) {
+                    console.log('success', result);
+                    $location.url('/notes');
+                },
+                function (result) {
+                    console.log('error', result);
+                })
+    }
 });
 
-app.controller('editCtrl', function ($http, $scope, $stateParams) {
+app.controller('editCtrl', function ($http, $scope, $stateParams, $location) {
 
     $scope.note=app.myGlobalObject;
     console.log($scope.note);
@@ -117,6 +149,7 @@ app.controller('editCtrl', function ($http, $scope, $stateParams) {
         $http.put('http://notesBack/public/api/notes/'+$scope.noteUuid, note)
             .then(function (result) {
                     console.log('success', result);
+                    $location.url('/notes/{noteUuid}');
                 },
                 function (result) {
                     console.log('error');
@@ -124,7 +157,7 @@ app.controller('editCtrl', function ($http, $scope, $stateParams) {
     }
 });
 
-app.controller('createCtrl', function ($http, $scope, $stateParams) {
+app.controller('createCtrl', function ($http, $scope, $location) {
 
 
     $scope.create = function(note) {
@@ -132,6 +165,7 @@ app.controller('createCtrl', function ($http, $scope, $stateParams) {
         $http.post('http://notesBack/public/api/notes', note)
             .then(function (result) {
                     console.log('success', result);
+                    $location.url('/notes/{noteUuid}');
                 },
                 function (result) {
                     console.log('error');
@@ -139,28 +173,60 @@ app.controller('createCtrl', function ($http, $scope, $stateParams) {
     }
 });
 
-app.controller('registerCtrl', function ($http, $scope) {
+app.controller('registerCtrl', function ($http, $scope, $location) {
     $scope.registering = function (user) {
         console.log(user);
         $http.post('http://notesBack/public/api/register', user)
             .then(function (result) {
                     console.log('success', result);
+                    $location.url('/notes');
                 },
                 function (result) {
-                    console.log('error');
+                    console.log('error' , result);
                 })
     }
 
 });
-app.controller('loginCtrl', function ($http, $scope) {
+app.controller('loginCtrl', function ($http, $scope, $location) {
    $scope.logining = function (user) {
        console.log(user);
        $http.post('http://notesBack/public/api/login', user)
            .then(function (result) {
                    console.log('success', result);
+                   $location.url('/notes');
                },
                function (result) {
-                   console.log('error');
+                   console.log('error', result);
                })
    }
+});
+
+app.controller('dashboardCtrl', function ($http, $scope) {
+
+    $http.get('http://notesBack/public/api/notes')
+        .then(function (result) {
+                console.log('success', result);
+                $scope.notes = result.data.data.collection;
+            },
+            function (result) {
+                console.log('error');
+            });
+
+});
+
+app.controller('notesSharedWuCtrl', function ($http, $scope) {
+
+    $http.get('http://notesBack/public/api/notes-shared-you')
+        .then(function (result) {
+                console.log('success', result);
+                $scope.notes = result.data.data.collection;
+            },
+            function (result) {
+                console.log('error');
+            });
+
+});
+
+app.controller('headerCtrl', function ($scope) {
+
 });

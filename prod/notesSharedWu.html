@@ -1,0 +1,39 @@
+
+
+<div ng-controller="notesSharedWuCtrl" id="outer">
+
+    <div style="display: flex; justify-content: center; margin-top: 100px; ">
+        <!-- Search form -->
+        <form id="custom-search-form" class="form-search form-horizontal pull-right" action="http://example-app/public/api" method="get">
+            <div class="input-append spancustom">
+                <input type="text" class="search-query" name="search" placeholder="Search" style="border: 1px solid">
+                <button type="submit" class="btn btn-primary">search</button>
+            </div>
+        </form>
+    </div>
+
+    <div ng-repeat='note in notes'>
+        <div class="card text-dark bg-light border-primary mb-3" style="width: 30%; position: inherit">
+            <div class="card-body">
+                <article style="margin: 15px">
+                    <h2 class="card-title" style="color: #ff8dac">{{note.title}}</h2>
+                    <p>{{note.text}}</p>
+                    <p>{{note.uuid}}</p>
+                    <p ng-if="note.visibility === 1">public</p>
+
+
+                    <a class="btn btn-info" ui-sref="note({ noteUuid: note.uuid })" ui-sref-active="active">
+                        details
+                    </a>
+
+                </article>
+            </div>
+            <div class="card-footer">{{note.author.name}}</div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
