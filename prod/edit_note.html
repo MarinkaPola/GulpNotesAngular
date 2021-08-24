@@ -17,7 +17,7 @@
                 <option value="0">private</option>
             </select>
         </div>
-        <div ng-repeat='attachment in note.attachments'>
+        <div ng-repeat='attachment in note.attachments' style="margin-bottom: 12px; margin-top: 5px">
             <label for="file_name">Delete file</label>
             <input id="file_name" type="checkbox" name="delete_attachments[]" value="{{attachment.id}}">
             {{attachment.file_original_name}}
