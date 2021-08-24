@@ -116,6 +116,7 @@ app.controller('appCtrl', function ($http, $scope) {
 app.controller('noteCtrl', function ($http, $scope, $stateParams, $location) {
 
     $scope.noteUuid = $stateParams.noteUuid;
+
     console.log($scope.noteUuid);
     $http.get('http://notesBack/public/api/notes/'+$scope.noteUuid)
         .then(function (result) {
@@ -135,7 +136,42 @@ app.controller('noteCtrl', function ($http, $scope, $stateParams, $location) {
                 function (result) {
                     console.log('error', result);
                 })
+    };
+    $scope.shared = function (note, email) {
+        $http.post('http://notesBack/public/api/notes/'+$scope.noteUuid+'/share', note, email)
+            .then(function (result) {
+                    console.log('success', result);
+                    $location.url('/notes');
+                },
+                function (result) {
+                    console.log('error', result);
+                })
+    };
+
+    $scope.detachFile = function (note, attachment) {
+        $scope.attachment = attachment;
+        $http.post('http://notesBack/public/api/notes/'+$scope.noteUuid+'/attachments/'+$scope.attachment.id, note, attachment)
+            .then(function (result) {
+                    console.log('success', result);
+                    $location.url('/notes');
+                },
+                function (result) {
+                    console.log('error', result);
+                })
+    };
+
+    $scope.downloadFile = function (note, attachment) {
+        $scope.attachment = attachment;
+        $http.post('http://notesBack/public/api/notes/'+$scope.noteUuid+'/attachments/'+$scope.attachment.id+'/download', note, attachment)
+            .then(function (result) {
+                    console.log('success', result);
+                    $location.url('/notes');
+                },
+                function (result) {
+                    console.log('error', result);
+                })
     }
+
 });
 
 app.controller('editCtrl', function ($http, $scope, $stateParams, $location) {
@@ -158,7 +194,6 @@ app.controller('editCtrl', function ($http, $scope, $stateParams, $location) {
 });
 
 app.controller('createCtrl', function ($http, $scope, $location) {
-
 
     $scope.create = function(note) {
         console.log(note);

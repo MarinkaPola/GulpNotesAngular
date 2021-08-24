@@ -13,23 +13,13 @@
                 <div style="display: flex; flex-direction: row">
                     <p>{{attachment.file_original_name}}</p>
 
-                    <form action="/notes/{{note.uuid}}/detach" method="post">
-
-                        <p>
                             <button class="btn btn-info" type="submit" value="{{attachment.id}}"
-                                    name="id" style="margin-left: 10px">Detach
+                                    name="id" style="margin-left: 10px" ng-click="detachFile(note, attachment)" >Detach
                             </button>
-                        </p>
-                    </form>
 
-                    <form action="/notes/{{note.uuid}}/download" method="get">
-
-                        <p>
                             <button class="btn btn-info" type="submit" value="{{attachment.id}}"
-                                    name="id" style="margin-left: 10px">Download
+                                    name="id" style="margin-left: 10px" ng-click="downloadFile(note, attachment)">Download
                             </button>
-                        </p>
-                    </form>
 
                 </div>
 
@@ -41,14 +31,10 @@
     <a class="btn btn-info" ui-sref="noteEdit({ noteUuid: note.uuid })" ui-sref-active="active">
         EDIT
     </a>
-    <form action="/notes/{{note.uuid}}" method="post">
-
         <button type="submit" class="btn btn-danger" ng-click="delete(note)">DELETE</button>
-    </form>
-    <form action="/notes/{{note.uuid}}/share" method="post">
-
+    <div>
         <label class="form-label">Введите email</label>
-        <input type="email" name="email">
-        <button type="submit" class="btn btn-success" style="margin-left: 6px">SHARED</button>
-    </form>
+        <input type="email" name="email" ng-model="email">
+        <button type="submit" class="btn btn-success" style="margin-left: 6px" ng-click="shared(note, email)">SHARED</button>
+    </div>
 </div>

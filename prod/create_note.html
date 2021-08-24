@@ -1,5 +1,5 @@
 
-<div ng-controller="createCtrl">
+<div ng-controller="createCtrl" style="width: 30%; margin-left: 30px">
     <form enctype="multipart/form-data" class="row g-3 needs-validation" >
     <div >
         <div class="col-md-16" style="padding-left: 0">
@@ -10,16 +10,16 @@
             <label for="exampleFormControlTextarea1" class="form-label">Текст</label>
             <textarea class="form-control" id="exampleFormControlTextarea1"    ng-model="note.text" rows="3"></textarea>
         </div>
-        <div class="form-group">
-            <label for="exampleFormControlSelect1">Видимость записки</label>
-            <select class="form-control" id="exampleFormControlSelect1" ng-required="true" ng-model="note.visibility">
+        <div class="form-group" style="margin-top: 15px; margin-bottom: 12px">
+            <label for="singleSelect">Видимость записки</label>
+            <select class="ng-pristine"  ng-required="true" id="singleSelect" name="singleSelect" ng-model="note.visibility" style="width: 100%; border-radius: 4px">
                 <option value="0">private</option>
                 <option value="1">public</option>
             </select>
         </div>
-        <input type="file" name="file" id="file" >
-        <div style="margin-top: 10px; padding-left: 0" class="col-md-10">
-            <button class="btn btn-primary" type="submit" ng-click="create(note)">Отправить заметку</button>
+        <input type="file" name="file" id="file" style="border-radius: 2px">
+        <div style="margin-top: 12px; padding-left: 0" class="col-md-10" >
+            <button class="btn btn-primary" type="submit" ng-click="create(note)" style="width: 120%">Отправить заметку</button>
         </div>
     </div>
 </form>
