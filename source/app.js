@@ -11,6 +11,11 @@ app.component('login', {
     controller: "loginCtrl",
 });
 
+app.component('logout', {
+   // templateUrl: "../login.html",
+    controller: "logoutCtrl",
+});
+
 app.component('header', {
     selector: "header", // <header></header>
     templateUrl: "../header.html",
@@ -90,6 +95,13 @@ app.config(['$stateProvider', function ($stateProvider) {
             url: '/login',
             component: 'login',
         })
+
+        .state(  {
+            name: 'logout',
+            url: "/logout",
+            component: 'logout',
+        })
+
         .state( {
             name: 'dashboard',
             url: '/notes',
@@ -227,13 +239,36 @@ app.controller('loginCtrl', function ($http, $scope, $location) {
        console.log(user);
        $http.post('http://notes/public/api/login', user)
            .then(function (result) {
+                   console.log(result.data.token);
+               if (result.data.token) {
+                   // store username and token in local storage to keep user logged in between page refreshes
+                   window.localStorage.currentUser = user;
+                  console.log(window.localStorage.currentUser);
+                   // add jwt token to auth header for all requests
+                   $http.defaults.headers.common.Authorization = 'Bearer ' + result.data.token;
                    console.log('success', result);
                    $location.url('/notes');
+               }
                },
                function (result) {
                    console.log('error', result);
                })
    }
+});
+
+app.controller('logoutCtrl', function ($http, $scope) {
+
+        $http.post('http://notes/public/api/logout')
+            .then(function (result) {
+                    console.log('success', result);
+                    delete window.localStorage.currentUser;
+                    $http.defaults.headers.common.Authorization = '';
+                    console.log(window.localStorage.currentUser);
+                    $location.url("");
+                },
+                function (result) {
+                    console.log('error');
+                });
 });
 
 app.controller('dashboardCtrl', function ($http, $scope) {

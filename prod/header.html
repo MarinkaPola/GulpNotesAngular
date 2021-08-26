@@ -5,6 +5,6 @@
     <div style="padding-top: 25px">
         <a ng-if="!user.id" ui-sref="login" ui-sref-active="active" class="text-sm text-gray-700 underline" style="margin-right: 15px">Login</a>
         <a ng-if="!user.id" ui-sref="register" ui-sref-active="active" class="ml-4 text-sm text-gray-700 underline" style="margin-right: 15px">Register</a>
-        <a ng-if="user.id" ui-sref="logout" ui-sref-active="active" class="ml-4 text-sm text-gray-700 underline" style="margin-right: 15px">Logout</a>
+        <a ng-if="!user.id" ui-sref="logout" ui-sref-active="active" class="ml-4 text-sm text-gray-700 underline" style="margin-right: 15px">Logout</a>
     </div>
 </div>
