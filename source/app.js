@@ -55,7 +55,6 @@ app.component('notesSharedWu', {
 
 app.config(['$stateProvider', function ($stateProvider) {
 
-
     $stateProvider
         .state( {
             name: 'note',
@@ -107,8 +106,8 @@ app.config(['$stateProvider', function ($stateProvider) {
             url: '/notes',
             component: 'dashboard',
         })
-}]);
-
+}]
+    );
 
 
 app.controller('appCtrl', function ($http, $scope) {
@@ -194,7 +193,7 @@ app.controller('editCtrl', function ($http, $scope, $stateParams, $location) {
     console.log($scope.noteUuid);
     $scope.update = function(note) {
         console.log(note);
-        $http.put('http://notes/public/api/notes/'+$scope.noteUuid, note)
+        $http.put('http://notes/public/api/notes/'+$scope.noteUuid, note, )
             .then(function (result) {
                     console.log('success', result);
                     $location.url('/notes/{noteUuid}');
@@ -212,7 +211,8 @@ app.controller('createCtrl', function ($http, $scope, $location) {
         $http.post('http://notes/public/api/notes', note)
             .then(function (result) {
                     console.log('success', result);
-                    $location.url('/notes/{noteUuid}');
+                    console.log(result.data.data.uuid);
+                    $location.url('/notes/'+result.data.data.uuid);
                 },
                 function (result) {
                     console.log('error');
@@ -242,12 +242,14 @@ app.controller('loginCtrl', function ($http, $scope, $location) {
                    console.log(result.data.token);
                if (result.data.token) {
                    // store username and token in local storage to keep user logged in between page refreshes
-                   window.localStorage.currentUser = user;
-                  console.log(window.localStorage.currentUser);
+                   window.localStorage.token = result.data.token;
+                  console.log(window.localStorage.token);
                    // add jwt token to auth header for all requests
                    $http.defaults.headers.common.Authorization = 'Bearer ' + result.data.token;
                    console.log('success', result);
-                   $location.url('/notes');
+                   console.log($location.absUrl().substring(0,21));
+                  $location.url('/notes');
+
                }
                },
                function (result) {
@@ -261,9 +263,9 @@ app.controller('logoutCtrl', function ($http, $scope) {
         $http.post('http://notes/public/api/logout')
             .then(function (result) {
                     console.log('success', result);
-                    delete window.localStorage.currentUser;
+                    delete window.localStorage.token;
                     $http.defaults.headers.common.Authorization = '';
-                    console.log(window.localStorage.currentUser);
+                    console.log(window.localStorage.token);
                     $location.url("");
                 },
                 function (result) {
@@ -298,5 +300,6 @@ app.controller('notesSharedWuCtrl', function ($http, $scope) {
 });
 
 app.controller('headerCtrl', function ($scope) {
-
+    $scope.token=window.localStorage.token;
+    console.log($scope.token);
 });
